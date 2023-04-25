@@ -1,60 +1,73 @@
 import Address from "./address";
 
 export default class Customer {
-    private _id: string;
-    private _name: string;
-    private _address!: Address;
-    private _active: boolean = false;
+  private _id: string;
+  private _name: string;
+  private _address!: Address;
+  private _active: boolean = false;
+  private _rewardPoints: number = 0;
 
-    constructor(id: string, name: string) {
-        this._id = id;
-        this._name = name;
-        this.validateAll();
+  constructor(id: string, name: string) {
+    this._id = id;
+    this._name = name;
+    this.validateAll();
+  }
+
+  validateName() {
+    if (this._name.length === 0) {
+      throw new Error("Name is required");
     }
+  }
 
-    validateName() {
-        if (this._name.length === 0) {
-            throw new Error("Name is required");
-        }
+  validateActivate() {
+    if (this._address === undefined) {
+      throw new Error("Address is mandatory to activate customer");
     }
+  }
 
-    validateActivate() {
-        if (this._address === undefined) {
-            throw new Error("Address is mandatory to activate customer")
-        }
+  validateAll() {
+    this.validateName();
+
+    if (this._id.length === 0) {
+      throw new Error("Id is required");
     }
+  }
 
-    validateAll() {
-        this.validateName();
+  changeName(name: string) {
+    this._name = name;
+    this.validateName();
+  }
 
-        if (this._id.length === 0) {
-            throw new Error("Id is required");
-        }
-    }
+  activate() {
+    this._active = true;
+    this.validateActivate();
+  }
 
-    changeName(name: string) {
-        this._name = name;
-        this.validateName();
-    }
+  deactivate() {
+    this._active = false;
+  }
 
-    activate() {
-        this._active = true;
-        this.validateActivate();
-    }
+  addRewardPoints(points: number): void {
+    this._rewardPoints += points;
+  }
 
-    deactivate() {
-        this._active = false;
-    }
+  isActive(): boolean {
+    return this._active;
+  }
 
-    isActive(): boolean {
-        return this._active;
-    }
+  get id(): string {
+    return this._id;
+  }
 
-    get name(): string {
-        return this._name;
-    }
+  get name(): string {
+    return this._name;
+  }
 
-    set Address(address: Address) {
-        this._address = address
-    }
+  get rewardPoints(): number {
+    return this._rewardPoints;
+  }
+
+  set Address(address: Address) {
+    this._address = address;
+  }
 }
