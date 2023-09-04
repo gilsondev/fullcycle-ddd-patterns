@@ -33,7 +33,7 @@ describe("Customer unit tests", () => {
   it("should activate a customer", () => {
     const customer = new Customer("123", "John");
     const address = new Address("Street 1", 123, "12350-123", "Brasilia");
-    customer.Address = address;
+    customer.changeAddress = address;
 
     customer.activate();
 

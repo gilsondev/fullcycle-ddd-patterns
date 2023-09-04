@@ -38,6 +38,10 @@ export default class Customer {
     this.validateName();
   }
 
+  changeAddress(address: Address) {
+    this._address = address;
+  }
+
   activate() {
     this._active = true;
     this.validateActivate();
@@ -65,6 +69,10 @@ export default class Customer {
 
   get rewardPoints(): number {
     return this._rewardPoints;
+  }
+
+  get address() {
+    return this._address;
   }
 
   set Address(address: Address) {
