@@ -56,7 +56,7 @@ describe("Customer Repository test", () => {
     );
 
     const orderRepository = new OrderRepository();
-    const order = new Order("1", "123", [orderItem]);
+    const order = new Order("1", customer.id, [orderItem]);
     await orderRepository.create(order);
     const total = order.total();
 
