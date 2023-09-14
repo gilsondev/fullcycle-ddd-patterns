@@ -20,7 +20,7 @@ describe("Order unit tests", () => {
     }).toThrowError("Items is not empty");
   });
 
-  it("Should calculate total", () => {
+  it("should calculate total", () => {
     const item1 = new OrderItem("123", "Mouse", 10, "p1", 2);
     const item2 = new OrderItem("345", "Keyboard", 10, "p2", 2);
 
@@ -35,10 +35,20 @@ describe("Order unit tests", () => {
     expect(total).toBe(40);
   });
 
-  it("Should throw error if the item quantity is less or equal to zero", () => {
+  it("should throw error if the item quantity is less or equal to zero", () => {
     expect(() => {
       const item1 = new OrderItem("123", "Mouse", 10, "p1", 0);
       const order1 = new Order("123", "112", [item1]);
     }).toThrowError("Quantity must be greater than 0");
+  });
+
+  it("should add new item", () => {
+    const item1 = new OrderItem("123", "Mouse", 10, "p1", 2);
+    const order = new Order("123", "112", [item1]);
+
+    const item2 = new OrderItem("345", "Keyboard", 10, "p2", 2);
+    order.addItem(item2);
+
+    expect(order.items).toEqual([item1, item2]);
   });
 });
